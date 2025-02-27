@@ -28,9 +28,8 @@ The system aims to forecast rainfall based on radar measurements, with an improv
 
 Follow the steps below to set up and run the app:
 
-### 1. Clone the Repository
-Clone the repository to your local machine:
+ 1. Clone the Repository
+ 2. Install the necessary libraries from requirements.txt
+ 3. Run the app.py
+ 4. Upload the sample test.csv to get rainfall prediction
 
-```bash
-git clone <repository_url>
-cd <repository_folder>
