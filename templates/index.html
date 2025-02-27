@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Background Image */
+        body {
+            background-image: url("{{ url_for('static', filename='images/bg_rain.jpeg') }}"); /* Update with the actual image name */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff; /* Text color for readability */
+        }
+
+        /* Navigation Bar Styling */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay for navbar */
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff !important; /* Ensure the text is white */
+        }
+
+        /* Form Styling */
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for form */
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: darkgreen; /* Green color */
+            border-color: darkgreen;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+            border-color: #45a049;
+        }
+
+        .alert-info {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .text-danger {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">PrecipiTrack</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center" style="color:black">Rainfall Prediction System</h2>
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('predict') }}">
+                <!-- Meteorologist ID -->
+                <div class="form-group">
+                    <label for="mid">Meteorologist ID:</label>
+                    <input type="text" class="form-control" id="mid" name="mid" placeholder="Enter Meteorologist ID">
+                    {% if error_msg1 %}
+                        <small class="text-danger">{{ error_msg1 }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- Date -->
+                <div class="form-group">
+                    <label for="date">Date (YYYY-MM-DD):</label>
+                    <input type="text" class="form-control" id="date" name="date" placeholder="Enter Date">
+                    {% if error_msg2 %}
+                        <small class="text-danger">{{ error_msg2 }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- File upload -->
+                <div class="form-group">
+                    <label for="file">Upload CSV File:</label>
+                    <input type="file" class="form-control-file" id="file" name="file">
+                    {% if error_msg3 %}
+                        <small class="text-danger">{{ error_msg3 }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- Display any column format errors -->
+                {% if error_msg5 %}
+                    <ul class="list-group">
+                        {% for error in error_msg5 %}
+                            <li class="list-group-item text-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if error_msg4 %}
+                    <small class="text-danger">{{ error_msg4 }}</small>
+                {% endif %}
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block">Predict Rainfall</button>
+            </form>
+        </div>
+
+        <!-- Display prediction result -->
+        {% if prediction_text %}
+            <div class="mt-4 alert alert-info">
+                <h4>{{ prediction_text }}</h4>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
