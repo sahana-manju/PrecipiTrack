@@ -1,6 +1,6 @@
 # Rainfall Prediction System
 
-This project utilizes a hybrid model consisting of **LSTM (Long Short-Term Memory)**, **Ridge Regression**, and **XGBoost** to predict rainfall measurements in millimeters, given radar measurements in a region. This hybrid approach has shown to reduce the prediction error by **10%** compared to existing standalone models.
+This project utilizes a hybrid model consisting of **LSTM (Long Short-Term Memory)**, **Ridge Regression**, and **XGBoost** to predict rainfall measurements in millimeters, given radar measurements in a region. This hybrid approach has shown to reduce the mean absolute error by **40%** compared to existing standalone models.
 
 ## Overview
 
